@@ -1,10 +1,11 @@
 package com.github.hayataka.hibernatevalidatorsample.context;
 
 import java.util.Locale;
+
 /**
- * Thread内での破棄をする仕組みが大前提
+ * Thread内での情報をすべて格納しているクラス. AutoCloseableの意図はtry()を用いるため
+ * 
  * @author hayakawatakahiko
- *
  */
 public class ThreadContext implements AutoCloseable {
 
@@ -12,17 +13,26 @@ public class ThreadContext implements AutoCloseable {
 	static {
 		instance = new ThreadContext();
 	}
+
 	public static ThreadContext getInstance() {
 		return instance;
 	}
 
+	/**
+	 * 初期値＝日本.
+	 */
 	private static ThreadLocal<Locale> data = new ThreadLocal<Locale>() {
+		/**
+		 * 初期値＝日本.
+		 * 
+		 * @return 日本
+		 */
 		@Override
 		protected Locale initialValue() {
 			return Locale.JAPAN;
 		}
 	};
-	
+
 	public Locale get() {
 		return data.get();
 	}
@@ -31,7 +41,11 @@ public class ThreadContext implements AutoCloseable {
 		data.set(locale);
 	}
 
+	/**
+	 * try()で閉じる.
+	 */
 	@Override
 	public void close() {
-		data.remove();	}
+		data.remove();
+	}
 }
