@@ -6,6 +6,10 @@ import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 
+/**
+ * 単純テスト用.
+ * @author hayakawatakahiko
+ */
 public class SimpleDto {
 	@AssertTrue
 	private boolean mustBeTrue;
