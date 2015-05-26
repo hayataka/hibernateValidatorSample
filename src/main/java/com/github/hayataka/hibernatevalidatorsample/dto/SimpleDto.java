@@ -20,10 +20,11 @@ public class SimpleDto {
 
 	@DecimalMax("50")
 	private int intValue;
-	
-	@DecimalMax("5.00")
+
+	//ここを定数化してしまえば、項目要素も他言語対応しやすいのでは？
+	@DecimalMax(value="5.00",message="{decimalMax}{javax.validation.constraints.DecimalMax.message}")
 	private BigDecimal bigDecimalValue;
-	
+
 	public boolean isMustBeTrue() {
 		return mustBeTrue;
 	}
